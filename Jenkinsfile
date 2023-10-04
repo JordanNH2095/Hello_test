@@ -20,27 +20,10 @@ pipeline {
     }
 
     stage('Deliver') {
-      parallel {
-        stage('Deliver') {
-          steps {
-            sh '''sh \'./jenkins/scripts/deliver.sh\'
-'''
-          }
-        }
-
-        stage('Deliver1') {
-          steps {
-            sh '''input message: \'Finished using the web site? (Click "Proceed" to continue)
-'''
-          }
-        }
-
-        stage('Deliver2') {
-          steps {
-            sh 'sh \'./jenkins/scripts/kill.sh\''
-          }
-        }
-
+      steps {
+        sh '''sh \'./jenkins/scripts/deliver.sh\'
+input message: \'Finished using the web site? (Click "Proceed" to continue)\' 
+sh \'./jenkins/scripts/kill.sh\' '''
       }
     }
 
